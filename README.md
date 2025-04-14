@@ -18,3 +18,5 @@ This Python script helps you generate secure, customizable passwords and evaluat
 ---
 
 ## 📸 Example Output
+
+<pre> Enter the desired password length: 12 Include uppercase letters? (yes/no): yes Include lowercase letters? (yes/no): yes Include digits? (yes/no): yes Include special characters? (yes/no): no Generated password: rXqWw1ni6G1R Entropy: 71.45 bits Strength: Strong (70/100) Estimated time to crack: 3734105 days, 1 hours, 10 minutes, 39 seconds Do you want to create another password? (yes/no): </pre>
