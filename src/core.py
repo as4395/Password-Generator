@@ -1,5 +1,3 @@
-# src/core.py
-
 import secrets
 import string
 import math
