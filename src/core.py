@@ -2,6 +2,7 @@ import secrets
 import string
 import math
 
+# Generate a secure password with required character types
 def generate_password(length, use_uppercase, use_lowercase, use_digits, use_special):
     lowercase_letters = string.ascii_lowercase
     uppercase_letters = string.ascii_uppercase
@@ -36,6 +37,7 @@ def generate_password(length, use_uppercase, use_lowercase, use_digits, use_spec
     secrets.SystemRandom().shuffle(password)
     return ''.join(password)
 
+# Calculate entropy in bits based on character variety and length
 def calculate_entropy(password):
     pool_size = 0
     if any(c.islower() for c in password):
@@ -48,6 +50,7 @@ def calculate_entropy(password):
         pool_size += len(string.punctuation)
     return len(password) * math.log2(pool_size)
 
+# Return a qualitative strength rating and score based on entropy
 def assess_strength(entropy):
     if entropy < 36:
         return "Very weak", 10
@@ -58,6 +61,7 @@ def assess_strength(entropy):
     else:
         return "Very strong", 100
 
+# Estimate brute-force crack time assuming a fixed number of attempts per second
 def estimate_crack_time(password, attempts_per_second=10e9):
     pool_size = 0
     if any(c.islower() for c in password):
@@ -71,7 +75,8 @@ def estimate_crack_time(password, attempts_per_second=10e9):
 
     total_combinations = pool_size ** len(password)
     seconds = total_combinations / attempts_per_second
-
+    
+    # Convert seconds into a readable format
     days = int(seconds // (24 * 3600))
     hours = int((seconds % (24 * 3600)) // 3600)
     minutes = int((seconds % 3600) // 60)
