@@ -3,6 +3,7 @@ import string
 import math
 import sys
 
+# Prompt the user for password preferences
 def customize_password():
     length = int(input("Enter the desired password length: "))
     use_uppercase = input("Include uppercase letters? (yes/no): ").lower() == 'yes'
@@ -11,6 +12,7 @@ def customize_password():
     use_special = input("Include special characters? (yes/no): ").lower() == 'yes'
     return length, use_uppercase, use_lowercase, use_digits, use_special
 
+# Generate a secure password based on selected options
 def generate_password(length=12, use_uppercase=True, use_lowercase=True, use_digits=True, use_special=True):
     lowercase_letters = string.ascii_lowercase
     uppercase_letters = string.ascii_uppercase
@@ -42,6 +44,7 @@ def generate_password(length=12, use_uppercase=True, use_lowercase=True, use_dig
     
     return ''.join(password)
 
+# Estimate entropy based on password length and character set size
 def calculate_entropy(password):
     pool_size = 0
     
@@ -57,6 +60,7 @@ def calculate_entropy(password):
     entropy = len(password) * math.log2(pool_size)
     return entropy
 
+# Classify strength based on entropy score
 def assess_strength(entropy):
     if entropy < 36:
         return "Very weak", 10
@@ -67,6 +71,7 @@ def assess_strength(entropy):
     else:
         return "Very strong", 100
 
+# Estimate time to crack password using brute force
 def estimate_crack_time(password, attempts_per_second=10e9):
     possible_combinations = 0
     if any(c.islower() for c in password):
@@ -115,7 +120,7 @@ def main():
         print("\nGenerated password:", password)
         print("Entropy: {:.2f} bits".format(entropy))
         print("Strength: {} ({}/100)".format(strength, score))
-        print("Estimated time to crack:", crack_time) #Using brute force only
+        print("Estimated time to crack:", crack_time) # Using brute force only
         print()
         
         create_another = input("Do you want to create another password? (yes/no): ").lower()
